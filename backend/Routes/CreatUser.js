@@ -21,7 +21,8 @@ async(req,res)=>{
      });
    await new_user.save();
      res.json(
-       {success:true}
+       {
+        success:true}
        )
    }
    catch(error)
