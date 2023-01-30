@@ -13,7 +13,7 @@ export default function Signup() {
         headers:{
           'Content-Type':'application/json'
         },
-       body:JSON.stringify({name:credentials.name,password:credentials.password,location:credentials.geolocation})
+       body:JSON.stringify({name:credentials.name,password:credentials.password,email:credentials.email,location:credentials.geolocation})
     })
        const json=await response.json()
        console.log(json)
