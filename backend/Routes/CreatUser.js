@@ -9,7 +9,7 @@ router.post(
   body("name").isLength({ min: 5 }),
   body("password", "incorrect password").isLength({ min: 5 }),
   async (req, res) => {
-    const errors = validationResult(req);
+    const errors = validationResult(req.body);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
@@ -44,16 +44,16 @@ router.post(
     }
     let email = req.body.email;
     try {
-      let userData = await User.findOne(email);
+      let userData = await User.findOne({ "email": email });
       if (!userData) {
-        res
+        return res
           .status(400)
           .json({ errors: "Trying logging with correct credentials" });
       }
       if (req.body.password !== userData.password) {
-        res
+        return res
           .status(400)
-          .json({ errors: "Trying logging with correct credentials" });
+          .json({ errors: "Trying logging with correct credSentials" });
       }
       return res.json({ success: true });
     } catch (error) {
