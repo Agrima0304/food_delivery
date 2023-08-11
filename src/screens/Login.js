@@ -2,6 +2,10 @@ import { useState } from "react"
 import React from 'react'
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
+import Footer from '../components/Footer'
+import NavBar from "../components/NavBar"
+
+
 export default function Login() {
   const [credentials,setcredentials]=useState({email:'',password:''})
     let navigate=useNavigate()
@@ -23,6 +27,8 @@ export default function Login() {
      }
      if(json.success)
      {
+      localStorage.setItem("authToken",json.authToken)
+      console.log(localStorage.getItem("authToken"))
       navigate('/')
      }
   }
@@ -30,7 +36,9 @@ export default function Login() {
       setcredentials({...credentials,[event.target.name]:event.target.value})
   } 
   return (
+    
     <div>
+      <div><NavBar/></div>
           <div className='container'>
       <form onSubmit={handleSubmit}>
   
@@ -47,6 +55,8 @@ export default function Login() {
   <Link to="/creatuser" className='m-3 btn btn-danger'>I am a new user </Link> 
 </form>
     </div>
+    <div> <Footer/></div>
+
     </div>
   )
 }
